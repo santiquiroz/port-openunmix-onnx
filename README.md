@@ -87,6 +87,25 @@ correr donde haya un onnxruntime. Si ya tenés torch instalado y corrés en CPU,
 Para escala: 19x tiempo real son unos 13 segundos por canción de 4 minutos, con las cuatro
 pistas. Un RoFormer de una sola pista, en la misma placa, va a ~1.2x.
 
+## fp16: la mitad de tamaño, cero de velocidad
+
+Medido (`toolkit/fp16_check.py`), porque valía cerrarlo con un número:
+
+| | tamaño | CPU EP | DirectML |
+|---|---:|---:|---:|
+| fp32 | 135.9 MiB | 22.09x | 18.73x |
+| fp16 | **68.0 MiB** | 21.95x | 17.68x |
+
+La fidelidad no es el problema: 53.5 a 68.7 dB SI-SDR contra fp32 según la
+pista, inaudible. Lo que no aparece es la velocidad — es **levemente más
+lento**, un 5.6% en DirectML.
+
+Es la misma regla que salió del port de RoFormer y ya se confirmó tres veces:
+**fp16 paga cuando el grafo está limitado por memoria**. Aquel sostiene un
+intermedio de atención de ~1.3 GB y ganó 12x; AudioSR ya entraba en VRAM y ganó
+9%; estos pesan 34 MiB cada uno y no ganan nada. Por eso el release publica
+fp32: 68 MiB de ahorro no compensan agregar una variante que además va más lenta.
+
 ## Uso
 
 ```powershell
