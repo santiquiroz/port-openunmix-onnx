@@ -1,0 +1,73 @@
+{
+  "model": "openunmix umxhq",
+  "license": "MIT (Zenodo record 3370489)",
+  "opset": 17,
+  "sample_rate": 44100,
+  "stft": {
+    "n_fft": 4096,
+    "hop": 1024,
+    "window": "hann periodic",
+    "center": true
+  },
+  "graph_io": {
+    "input": "mag [1, 2, 2049, frames] float32 (magnitud de la mezcla)",
+    "output": "estimate [1, 2, 2049, frames] float32 (magnitud de la pista)",
+    "dynamic": [
+      "frames"
+    ]
+  },
+  "models": {
+    "vocals": {
+      "file": "umxhq_vocals.onnx",
+      "target": "vocals",
+      "checkpoint": "vocals-b62c91ce.pth",
+      "checkpoint_sha256": "b62c91cedbc7a066f1778ead5b5cecb377aa3a46a31af1cce7c5c8769339d083",
+      "graph_sha256": "d1297b08e1849f0264da64d995d7489d85e07160b659ccce19b55b7e553ff854",
+      "bytes": 35625585,
+      "parity_vs_torch": {
+        "max": 7.450580596923828e-06,
+        "rms": 3.306224337086578e-07,
+        "ok": true
+      }
+    },
+    "drums": {
+      "file": "umxhq_drums.onnx",
+      "target": "drums",
+      "checkpoint": "drums-9619578f.pth",
+      "checkpoint_sha256": "9619578f885c54737cb0234f9f9a4a679ee4f31438fd77fd1dbe02bb16c2da0a",
+      "graph_sha256": "b5472fe5f683cfa27e44caa82859984400788e4dd8ea7602a721fa4ea365e8c2",
+      "bytes": 35625585,
+      "parity_vs_torch": {
+        "max": 1.0848045349121094e-05,
+        "rms": 8.032347171774877e-07,
+        "ok": true
+      }
+    },
+    "bass": {
+      "file": "umxhq_bass.onnx",
+      "target": "bass",
+      "checkpoint": "bass-8d85a5bd.pth",
+      "checkpoint_sha256": "8d85a5bd3f996a8867fca0e8442e077e5a3f5ec747a6112742452a8f347b39c8",
+      "graph_sha256": "cb9d14b180ed2e7dcf1c76acfa96cc373f6228c71b80a0f3096e282e9106c040",
+      "bytes": 35625585,
+      "parity_vs_torch": {
+        "max": 5.513429641723633e-06,
+        "rms": 8.904550717917815e-08,
+        "ok": true
+      }
+    },
+    "other": {
+      "file": "umxhq_other.onnx",
+      "target": "other",
+      "checkpoint": "other-b52fbbf7.pth",
+      "checkpoint_sha256": "b52fbbf76479e752bd72e02304c602ac7802aa5bfbfb9cd12054b2695d5093ab",
+      "graph_sha256": "2650bc0def77e52de6ffeb32c5bb6063e84896e80a32cc33e53ebea010a54034",
+      "bytes": 35625585,
+      "parity_vs_torch": {
+        "max": 6.4373016357421875e-06,
+        "rms": 3.4607698065580037e-07,
+        "ok": true
+      }
+    }
+  }
+}

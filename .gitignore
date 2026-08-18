@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+# Los checkpoints .pth se bajan de Zenodo; los .onnx se publican en el release.
+checkpoints/
+artifacts/*.onnx
